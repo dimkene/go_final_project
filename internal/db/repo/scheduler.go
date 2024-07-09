@@ -153,11 +153,11 @@ func (tr TasksRepository) SearchTasks(searchData SearchQueryData) ([]models.Task
 	rows, err := tr.db.Query(querySQL,
 		sql.Named("search", queryData.Param),
 		sql.Named("limit", 20))
-	defer rows.Close()
 
 	if err != nil {
 		return nil, err
 	}
+	defer rows.Close()
 
 	result := []models.Task{}
 	// заполняем объект Task данными из таблицы
